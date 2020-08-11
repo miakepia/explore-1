@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <div class="app-c-back-link-inverse">
+    <a class="govuk-back-link" href="/">Back</a>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+      <header class="topic-head app-c-inverse-header app-c-inverse-header--full-width app-c-inverse-header--padding-top">
+        <h1 class="page-heading govuk-heading-xl app-c-title--inverse">
+          {{ title }}
+        </h1>
+
+        <p class="lede govuk-body-l app-c-lead-paragraph--inverse">{{ description }}</p>
+
+        <h2 class="govuk-heading-l app-c-title--inverse">Featured links</h2>
+        <ol class="feature-links govuk-list govuk-list--bullet app-c-list-inverse">
+        {% for feature in featured %}
+          <li><a href="{{feature.link}}" class="govuk-link">{{feature.title}}</a></li>
+        {% endfor %}
+        </ol>
+
+
+      </header>
+  <div class="govuk-grid-row">
+    <div class="tab-section govuk-grid-column-two-thirds">
+
+
+      {% set topicsHtml %}
+        {% for topic in subtopics %}
+          <h2 class="sub-topics govuk-heading-l">{{ topic.title }}</h2>
+          {{ govukAccordion(topic.subtopic_sections) }}
+        {% endfor %}
+      {% endset -%}
+
+      {% set governmentHtml %}
+      <h2 class="govuk-heading-l">Latest news</h2>
+      <p class="lede govuk-body-l">News and communications about {{ title.toLowerCase() }}</p>
+
+      <a href="{{ latest_news.url}}"><image src="{{latest_news.image_url}}" alt="{{latest_news.title}}" />
+      <h3>{{latest_news.title}}</h3></a>
+      <p class="govuk-body govuk-!-margin-bottom-6">{{ latest_news.description }}</p>
+
+      <p class="govuk-body govuk-!-margin-bottom-9">
+        <a href="/search/news-and-communications?filter_part_of_taxonomy_tree=dded88e2-f92e-424f-b73e-6ad24a839c51">See all news</a>
+      </p>
+
+      <div class="publications govuk-footer pad-stuff">
+        <h2 class="govuk-heading-l">Publications</h2>
+        <p class="lede govuk-body-l">Regulation, research, policy and data in this topic</p>
+        <p class=govuk-body>
+          <a href="/search/news-and-communications?filter_part_of_taxonomy_tree=dded88e2-f92e-424f-b73e-6ad24a839c51">Policy papers and consultations</a>
+        </p>
+        <p class=govuk-body>
+          <a href="/search/news-and-communications?filter_part_of_taxonomy_tree=dded88e2-f92e-424f-b73e-6ad24a839c51">Guidance and regulation</a>
+        </p>
+      </div>
+      {% endset -%}
+
+
+      {{ govukTabs({
+        items: [
+          {
+            label: "Topics",
+            id: "topics",
+            panel: {
+              html: topicsHtml
+            }
+          },
+          {
+            label: "Government activity",
+            id: "government-activity",
+            panel: {
+              html: governmentHtml
+            }
+          }
+        ]
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="topic-tags">
+        <ul>
+          <li>Topic tag</li>
+          <li>Topic tag</li>
+          <li>Topic tag</li>
+          <li>Topic tag</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
