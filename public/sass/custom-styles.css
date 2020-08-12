@@ -21,7 +21,6 @@
   border: none;
   padding-left: 0;
   padding-right: 0;
-
 }
 
 /* Feature links */
@@ -49,7 +48,13 @@
   padding-right: 15px;
 }
 
-
+.js-enabled .govuk-accordion {
+    border-bottom: 1px solid #b1b4b6;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
 /* Government activity section */
 .publications {
@@ -58,7 +63,7 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 35px;
-
+}
 
 /* Wrapping sub-topics headings 2/3rds, so that it sits in line with 'open all' */
 .sub-topics {
@@ -68,7 +73,7 @@
 
 /* Accordion */
 .js-enabled .govuk-accordion {
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 }
 
 .js-enabled .govuk-accordion__open-all {
